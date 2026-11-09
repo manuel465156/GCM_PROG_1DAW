@@ -23,8 +23,14 @@ public class Ej4 {
         int mes2=sr.nextInt();
         System.out.println("Dime el año de hoy");
         int año2=sr.nextInt();
-        System.out.println("Tienes " + (año2-año) + " años");
-        //28/10/2026
+        int edad=año2-año;
+        if (mes2<mes) {
+            edad--;
+        } else if (mes==mes2 && dia2<dia){
+            edad--;
+        }
+        System.out.println("Tienes " + edad + " años");
+        //4/11/2026
         //13-01-2008
                 
     }
