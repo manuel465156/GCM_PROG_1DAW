@@ -26,6 +26,7 @@ public class TiposPrimitivos {
         //Cadena
         String s1;
         //s1. ;
+        //char c=sr.next().charAt(0);
 
         //Logicos
         boolean bf=false;
