@@ -13,21 +13,32 @@ public class Ej2 {
         Scanner sr=new Scanner (System.in);
         System.out.println("Dime un numero");
         int num=sr.nextInt();
+        if (num<0) {
+            System.out.println("El numero debe ser positivo");
+        } else {
         int contador=contardig(num);
         eliminar(num, contador);
-        System.out.println(contador);
+        }
     }
     public static void eliminar(int num, int cifras){
-        int divisor=10^(cifras-1),numfinal=0;
-        for (int i = 0; i < cifras; i++) {
-            int numtemp=num/divisor;
-            if (numtemp==8 | numtemp==0) {
-                numfinal=numtemp;
-            }
-            divisor=divisor/10;
-        }
-        System.out.println(numfinal);
+    int divisor = 1;
+    for (int i = 1; i < cifras; i++) {
+        divisor *= 10; // lo mismo a divisor=divisor*10
     }
+    int numfinal = 0, contador=0;
+    while (divisor > 0) {
+        int cifra = (num / divisor) % 10;  // cifra individual
+        if (cifra != 8 && cifra!=0) {
+            numfinal = numfinal * 10 + cifra;
+        } else {
+        contador=contador+ 1;
+        }
+        divisor /= 10;
+    }
+    System.out.println("Numero resultado: " + numfinal);
+    System.out.println("Digitos eliminados: " + contador);
+
+    }        
     public static int contardig(int num){
         int contador=0;
         while (num > 0) {
