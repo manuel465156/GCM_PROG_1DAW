@@ -4,6 +4,7 @@
  */
 package Ej2324;
 import java.util.Scanner;
+import static Ej2425.Ej2.contardig;
 
 /**
  *
@@ -32,27 +33,53 @@ public class Ej2 {
                 bandera2=false;
             }
         }
-        int resultado=saltando(num, salto);
+        int cifras=contardig(num), divisor=1;
+        for (int i = 1; i < cifras; i++) {
+            divisor*=10;
+        }
+        int resultado=saltando(num, salto, divisor);
         System.out.println("Resultado: " + resultado);
     }
-    public static int saltando(int n, int salto) {
-        int resultado = 0;
-        int divisor = 1;
-        while (n / divisor >= 10) {
-            divisor *= 10;
-        }
-        // Recorremos las cifras de izquierda a derecha
-        int posicion = 0;
-        while (divisor > 0) {
-            int cifra = n / divisor;
-            // Comprobamos si debemos guardar esta cifra
-            if (posicion % (salto + 1)==0) {
-                resultado = resultado * 10 + cifra;
+    public static int saltando(int n, int salto, int ncifras){
+        switch (salto) {
+            case 1 -> {
+                System.out.println("Has puesto 1 salto");
+                if (ncifras%2==0) {
+                    int pasos=(ncifras)/2-1;
+                    int izq=cifraizq(n, ncifras), acumulador=1;
+                    while (izq>pasos) {
+                        acumulador=(acumulador*10)+izq ;
+                    }
+                    return acumulador;
+                } else {
+                    int pasos=(ncifras)/2+1;
+                    int izq=cifraizq(n, ncifras), acumulador=1;
+                    while (izq>pasos) {
+                        acumulador=(acumulador*10)+izq ;
+                    }
+                    return acumulador;
+                }
             }
-            n = n % divisor;
-            divisor /= 10;
-            posicion++;
+            case 2 -> {
+                System.out.println("Has puesto 2 salto");
+                int pasos=(ncifras/3)+1;
+                int izq=cifraizq(n, ncifras), acumulador=1;
+                while (izq>pasos) {
+                    acumulador=(acumulador*10)+izq ;
+                }
+                return acumulador;
+            }
+            default -> {
+                System.out.println("Has puesto 0 salto");
+                return n;
+            }
         }
-        return resultado;
+    }
+    public static int cifraizq(int n, int divisor){
+            int num=(n/divisor);
+            int sobrante=n%divisor;
+            System.out.println(num);
+            System.out.println(sobrante);
+        return num;
     }
 }
